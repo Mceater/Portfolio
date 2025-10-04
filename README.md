@@ -15,9 +15,15 @@ A modern, responsive portfolio website built with React, TypeScript, Tailwind CS
 
 - **Hero** - Introduction with call-to-action buttons
 - **Projects** - Showcase of your work with links to demos and GitHub
-- **Skills** - Organized by categories (Programming, Data Engineering, Visualization)
+- **Skills** - Organized by categories (Languages, Tools, Databases, Frameworks)
 - **About** - Personal information and background
 - **Contact** - Social media links and contact information
+
+## Projects Featured
+
+- **Movie App (IMDB Without Money)** - React-based movie discovery app with TMDb API
+- **Memoirs** - React Native image uploading mobile application
+- **Adverts** - Full-stack React platform with payment processing and enterprise features
 
 ## Getting Started
 
@@ -30,8 +36,8 @@ A modern, responsive portfolio website built with React, TypeScript, Tailwind CS
 
 1. Clone the repository
 ```bash
-git clone <your-repo-url>
-cd portfolio_web
+git clone https://github.com/Mceater/Portfolio.git
+cd Portfolio
 ```
 
 2. Install dependencies
@@ -60,7 +66,7 @@ The built files will be in the `dist` directory.
 
 Edit the following in `src/Portfolio.tsx`:
 
-1. **Name**: Replace "Your Name" in the Hero section
+1. **Name**: Replace "Farhan R" in the Hero section
 2. **Title/Description**: Update the subtitle in the Hero section
 3. **Projects**: Replace the placeholder projects with your actual projects
 4. **Skills**: Update the skills categories and items
@@ -87,6 +93,10 @@ The project uses Tailwind CSS. You can customize:
 - **Tailwind CSS** - Utility-first CSS framework
 - **Framer Motion** - Animation library
 - **Lucide React** - Icon library
+
+## Deployment
+
+This portfolio is deployed on Vercel at: [portfolio-mceaters-projects.vercel.app](https://portfolio-mceaters-projects.vercel.app)
 
 ## License
 
