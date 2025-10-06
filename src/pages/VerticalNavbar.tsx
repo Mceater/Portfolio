@@ -95,14 +95,7 @@ export function VerticalNavbar() {
             </a>
           </div>
 
-        {/* Mobile close button (shown when opened via hamburger) */}
-        <button
-          aria-label="Close navigation"
-          onClick={() => setIsOpen(false)}
-          className="md:hidden absolute -right-10 top-2 rounded-full bg-black/60 text-white p-2"
-        >
-          <X className="w-4 h-4" />
-        </button>
+        {/* No separate close button on mobile; hamburger toggles open/close */}
       </motion.div>
 
       {/* Floating hamburger toggles the same sidebar open/closed */}
