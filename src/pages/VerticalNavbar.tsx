@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Home, User, Code, Mail } from "lucide-react";
+import { Github, Linkedin, Home, User, Code, Mail, Brain, Info, Wrench } from "lucide-react";
 
 // ========================
 // Vertical Navigation Bar
@@ -7,9 +7,9 @@ import { Github, Linkedin, Home, User, Code, Mail } from "lucide-react";
 export function VerticalNavbar() {
   const navItems = [
     { id: "hero", label: "Home", icon: Home },
-    { id: "projects", label: "Projects", icon: Code },
-    { id: "skills", label: "Skills", icon: User },
     { id: "about", label: "About", icon: User },
+    { id: "projects", label: "Projects", icon: Code },
+    { id: "skills", label: "Skills", icon: Wrench },
     { id: "contact", label: "Contact", icon: Mail },
   ];
 
