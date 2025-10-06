@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Github, Linkedin, Home, User, Code, Mail, Wrench, Menu, X } from "lucide-react";
 
 // ========================
@@ -24,12 +24,13 @@ export function VerticalNavbar() {
 
   return (
     <>
-      {/* Desktop / Tablet: Hover-reveal vertical bar */}
+      {/* Unified side bar: hover on desktop; toggled open on mobile via hamburger */}
       <motion.div
         initial={{ x: -60 }}
+        animate={{ x: isOpen ? 0 : -60 }}
         whileHover={{ x: 0 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="hidden md:block fixed left-0 top-1/2 transform -translate-y-1/2 z-50"
+        className="block fixed left-0 top-1/2 transform -translate-y-1/2 z-50"
       >
         {/* Indicator dot when navbar is hidden */}
         <div className="absolute -right-2 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-white/40 rounded-full"></div>
@@ -79,93 +80,30 @@ export function VerticalNavbar() {
             </motion.a>
           </div>
         </div>
+
+        {/* Mobile close button (shown when opened via hamburger) */}
+        <button
+          aria-label="Close navigation"
+          onClick={() => setIsOpen(false)}
+          className="md:hidden absolute -right-10 top-2 rounded-full bg-black/60 text-white p-2"
+        >
+          <X className="w-4 h-4" />
+        </button>
       </motion.div>
 
-      {/* Mobile: Floating hamburger + slide-in drawer */}
-      <div className="md:hidden">
-        {/* Floating hamburger button */}
+      {/* Floating hamburger toggles the same sidebar open/closed */}
+      <div className="block">
         <button
-          aria-label="Open navigation"
-          onClick={() => setIsOpen(true)}
-          className="fixed left-4 bottom-6 z-50 rounded-full bg-black/30 backdrop-blur-md border border-white/20 shadow-xl p-3 text-white"
+          aria-label={isOpen ? "Close navigation" : "Open navigation"}
+          onClick={() => setIsOpen((v) => !v)}
+          className="fixed top-4 left-4 z-[100] rounded-full bg-black/60 backdrop-blur-md border border-white/40 shadow-2xl p-3 text-white ring-1 ring-white/30"
+          style={{
+            paddingTop: "calc(0.75rem + env(safe-area-inset-top, 0px))",
+            paddingLeft: "calc(0.75rem + env(safe-area-inset-left, 0px))",
+          }}
         >
-          <Menu className="w-6 h-6" />
+          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
-
-        {/* Overlay */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              className="fixed inset-0 z-50"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              onClick={() => setIsOpen(false)}
-            >
-              <div className="absolute inset-0 bg-black/40" />
-
-              {/* Drawer */}
-              <motion.div
-                initial={{ x: -280 }}
-                animate={{ x: 0 }}
-                exit={{ x: -280 }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="relative h-full w-64 bg-gray-900/90 backdrop-blur-xl border-r border-white/10 shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="flex items-center justify-between px-4 py-4 border-b border-white/10">
-                  <span className="text-white/90 font-semibold">Navigation</span>
-                  <button
-                    aria-label="Close navigation"
-                    onClick={() => setIsOpen(false)}
-                    className="rounded-md p-1 text-white/80 hover:text-white"
-                  >
-                    <X className="w-6 h-6" />
-                  </button>
-                </div>
-
-                <nav className="p-3">
-                  {navItems.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <button
-                        key={item.id}
-                        onClick={() => {
-                          setIsOpen(false);
-                          scrollToSection(item.id);
-                        }}
-                        className="w-full flex items-center gap-3 px-3 py-3 rounded-lg text-left text-white/90 hover:bg-white/10"
-                      >
-                        <Icon className="w-5 h-5" />
-                        <span>{item.label}</span>
-                      </button>
-                    );
-                  })}
-
-                  <div className="mt-4 border-t border-white/10 pt-3 flex gap-3">
-                    <a
-                      href="https://github.com/Mceater"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 text-white hover:bg-white/20"
-                    >
-                      <Github className="w-5 h-5" />
-                    </a>
-                    <a
-                      href="https://linkedin.com/in/farhan-risan"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 text-white hover:bg-white/20"
-                    >
-                      <Linkedin className="w-5 h-5" />
-                    </a>
-                  </div>
-                </nav>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </>
   );
