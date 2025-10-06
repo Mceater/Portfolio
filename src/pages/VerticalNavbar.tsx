@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Home, User, Code, Mail, Brain, Info, Wrench } from "lucide-react";
+import { Github, Linkedin, Home, User, Code, Mail, Wrench } from "lucide-react";
 
 // ========================
 // Vertical Navigation Bar
