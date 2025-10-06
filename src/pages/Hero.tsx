@@ -11,7 +11,7 @@ export function Hero() {
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-5xl font-bold mb-4"
+        className="text-5xl font-bold mb-4 tracking-tight"
       >
         Hi, I'm <span className="text-blue-500">Farhan R</span>
       </motion.h1>

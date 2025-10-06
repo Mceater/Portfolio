@@ -34,8 +34,8 @@ export function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-20 px-6 max-w-6xl mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-10">Projects</h2>
+    <section id="projects" className="py-24 px-6 max-w-6xl mx-auto">
+      <h2 className="text-3xl font-bold text-center mb-10 tracking-tight">Projects</h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
           <motion.div
@@ -51,10 +51,15 @@ export function Projects() {
                 <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-grow">
                   {project.description}
                 </p>
-                <div className="mb-4">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">
-                    Tech Stack: {project.techStack}
-                  </p>
+                <div className="mb-4 flex flex-wrap gap-2">
+                  {project.techStack.split(",").map((t) => (
+                    <span
+                      key={t.trim()}
+                      className="px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs"
+                    >
+                      {t.trim()}
+                    </span>
+                  ))}
                 </div>
                 <div className="flex gap-3 mt-auto">
                   <a 
