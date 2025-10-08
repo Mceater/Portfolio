@@ -4,8 +4,16 @@ import { Card, CardContent } from "@/components/ui/card";
 // ========================
 // Projects Section
 // ========================
-export function Projects() {
-  const projects = [
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  techStack: string; // comma separated
+  liveDemo: string;
+  github: string;
+};
+
+const PROJECTS: Project[] = [
     {
       id: 1,
       title: "Movie App (IMDB Without Money)",
@@ -31,13 +39,15 @@ export function Projects() {
       liveDemo: "https://adverts-dun.vercel.app",
       github: "https://github.com/Mceater/adverts"
     }
-  ];
+];
+
+export function Projects() {
 
   return (
     <section id="projects" className="py-24 px-6 max-w-6xl mx-auto">
       <h2 className="text-3xl font-bold text-center mb-10 tracking-tight">Projects</h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
+        {PROJECTS.map((project) => (
           <motion.div
             key={project.id}
             initial={{ opacity: 0, y: 20 }}

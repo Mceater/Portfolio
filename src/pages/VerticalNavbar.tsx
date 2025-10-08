@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Home, User, Code, Mail, Wrench, Menu, X } from "lucide-react";
+import { Github, Linkedin, Home, User, FolderOpen, Mail, Settings, Menu, X } from "lucide-react";
 
 // ========================
 // Vertical Navigation Bar
 // ========================
+type NavItem = { id: string; label: string; icon: React.ComponentType<{ className?: string }> };
+
+const NAV_ITEMS: NavItem[] = [
+  { id: "hero", label: "Home", icon: Home },
+  { id: "about", label: "About", icon: User },
+  { id: "projects", label: "Projects", icon: FolderOpen },
+  { id: "skills", label: "Skills", icon: Settings },
+  { id: "contact", label: "Contact", icon: Mail },
+];
+
 export function VerticalNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeId, setActiveId] = useState<string>("hero");
-  const navItems = [
-    { id: "hero", label: "Home", icon: Home },
-    { id: "about", label: "About", icon: User },
-    { id: "projects", label: "Projects", icon: Code },
-    { id: "skills", label: "Skills", icon: Wrench },
-    { id: "contact", label: "Contact", icon: Mail },
-  ];
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -25,7 +28,7 @@ export function VerticalNavbar() {
 
   // Observe sections to highlight active icon
   useEffect(() => {
-    const sectionIds = ["hero", "about", "projects", "skills", "contact"];
+    const sectionIds = NAV_ITEMS.map((n) => n.id);
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -64,38 +67,52 @@ export function VerticalNavbar() {
         transition={{ duration: 0.3, ease: "easeOut" }}
         className="block fixed left-0 top-1/2 transform -translate-y-1/2 z-[9999] pointer-events-auto"
       >
-        <div className="p-2 w-14">
-            {navItems.map((item) => {
+        <div className="bg-black/20 backdrop-blur-lg rounded-r-xl border-r border-white/10 shadow-xl">
+          <div className="p-3 w-16">
+            {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
               const isActive = activeId === item.id;
               return (
                 <motion.button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  whileHover={{ scale: 1.1 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`w-10 h-10 flex items-center justify-center mb-2 rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 ${
-                    isActive ? "bg-white/20 ring-1 ring-white/30" : "hover:bg-white/10"
+                  className={`w-12 h-12 flex items-center justify-center mb-3 rounded-xl transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 ${
+                    isActive 
+                      ? "bg-white/20 text-white shadow-lg" 
+                      : "hover:bg-white/10 text-white/80 hover:text-white"
                   }`}
                   title={item.label}
                 >
-                  <Icon className={"w-5 h-5 " + (isActive ? "text-white" : "text-white/90")} />
+                  <Icon className="w-5 h-5" />
                 </motion.button>
               );
             })}
           </div>
 
           {/* Social icons (stacked) */}
-          <div className="px-2 pb-2 flex flex-col items-center gap-2">
-            <a href="https://github.com/Mceater" target="_blank" rel="noopener noreferrer" className="flex w-10 h-10 items-center justify-center rounded-full hover:bg-white/10 text-white/90" title="GitHub">
+          <div className="px-3 pb-3 flex flex-col items-center gap-3">
+            <a 
+              href="https://github.com/Mceater" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex w-12 h-12 items-center justify-center rounded-xl hover:bg-white/10 text-white/80 hover:text-white transition-all duration-200 hover:scale-105" 
+              title="GitHub"
+            >
               <Github className="w-5 h-5" />
             </a>
-            <a href="https://linkedin.com/in/farhan-risan" target="_blank" rel="noopener noreferrer" className="flex w-10 h-10 items-center justify-center rounded-full hover:bg-white/10 text-white/90" title="LinkedIn">
+            <a 
+              href="https://linkedin.com/in/farhan-risan" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex w-12 h-12 items-center justify-center rounded-xl hover:bg-white/10 text-white/80 hover:text-white transition-all duration-200 hover:scale-105" 
+              title="LinkedIn"
+            >
               <Linkedin className="w-5 h-5" />
             </a>
           </div>
-
-        {/* No separate close button on mobile; hamburger toggles open/close */}
+        </div>
       </motion.div>
 
       {/* Floating hamburger toggles the same sidebar open/closed */}
@@ -103,10 +120,10 @@ export function VerticalNavbar() {
         <button
           aria-label={isOpen ? "Close navigation" : "Open navigation"}
           onClick={() => setIsOpen((v) => !v)}
-          className="fixed top-4 left-4 z-[10000] rounded-md bg-black/60 backdrop-blur-md border border-white/40 shadow-2xl px-3 py-2 text-white ring-1 ring-white/30"
+          className="fixed top-4 left-4 z-[10000] rounded-xl bg-black/60 backdrop-blur-lg border border-white/20 shadow-xl px-4 py-3 text-white hover:bg-black/70 transition-all duration-200 hover:scale-105"
           style={{
             paddingTop: "calc(0.75rem + env(safe-area-inset-top, 0px))",
-            paddingLeft: "calc(0.75rem + env(safe-area-inset-left, 0px))",
+            paddingLeft: "calc(1rem + env(safe-area-inset-left, 0px))",
           }}
         >
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
